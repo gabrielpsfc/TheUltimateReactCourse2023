@@ -3,22 +3,20 @@ import './App.css';
 import Avatar from './components/Avatar';
 import Intro from './components/Intro';
 import Skill from './components/Skill';
-
+import { sk } from './data/SkillArray';
 
 
 function App() {
 
   return (
     <div className="card">
+
+
       <Avatar />
       <div className="data">
+        <Intro />
         <div className="skillList">
-          <Intro />
-          <Skill skill='coder' color='blue' emoji='💪' />
-          <Skill skill='gardener' color='green' emoji='💪' />
-          <Skill skill='cs:go player' color='grey' emoji='💪' />
-          <Skill skill='driver' color='red' emoji='💪' />
-          <Skill skill='dog owner' color='yellow' emoji='💪' />
+          {sk.map(skl => <Skill skill={skl.skill} color={skl.color} emoji={skl.level} />)}
         </div>
 
 
