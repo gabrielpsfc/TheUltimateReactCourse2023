@@ -1,51 +1,66 @@
+import "./App.css";
+import { useState } from "react";
 
-import './App.css';
-import { useState } from 'react'
-
-
-
-function App() {
-  const [cont, setCount] = useState(0)
-  const [step, setStep] = useState(1)
-  const hoje = new Date();
-  hoje.setDate(hoje.getDate() + cont)
-  const ano = hoje.getFullYear()
-  const dia = hoje.getDate()
-  const mes = hoje.getMonth()
-  //const dia = hoje.
-
-
-
-
-  function handleCount(flag = true) {
-    if (flag) {
-      setCount((s) => s + step)
-
-      console.log('true')
-    } else {
-      setCount((s) => s - step)
-      console.log('false')
-    }
-
-
-
-  }
-
-  function handleStep(flag = true) {
-    flag ? setStep((s) => s + 1) : setStep((s) => s - 1)
-  }
-
-
-  return <>
-    <div><button onClick={() => handleStep(false)} >-</button>Step: {step} <button onClick={() => handleStep()} >+</button></div>
-    <div><button onClick={() => handleCount(false)} >-</button>Count: {cont} <button onClick={() => handleCount()}>+</button></div>
-    <p>{hoje.toDateString()}</p><p>{dia}/{mes + 1}/{ano}</p>
-
-
-  </>
+export default function App() {
+  return (
+    <div className="App">
+      <Counter />
+    </div>
+  );
 }
 
-export default App;
+function Counter() {
+  const [count, setCount] = useState(0);
+  const [step, setStep] = useState(1);
+
+  const date = new Date();
+  date.setDate(date.getDate() + count);
+
+  function handleReset() {
+    setCount(0);
+    setStep(1);
+  }
+
+  return (
+    <div>
+      <div>
+        <span>Step: {step}</span>
+        <input
+          type="range"
+          value={step}
+          onChange={(e) => setStep(Number(e.target.value))}
+          min="0"
+          max="10"
+        ></input>
+      </div>
+
+      <div>
+        <button onClick={() => setCount((c) => c - step)}>-</button>
+        <input
+          type="text"
+          value={count}
+          onChange={(e) => setCount(Number(e.target.value))}
+        />
+        <button onClick={() => setCount((c) => c + step)}>+</button>
+      </div>
+
+      <p>
+        <span>
+          {count === 0
+            ? "Today is "
+            : count > 0
+            ? `${count} days from today is `
+            : `${Math.abs(count)} days ago was `}
+        </span>
+        <span>{date.toDateString()}</span>
+      </p>
+
+      {count !== 0 || step !== 1 ? (
+        <button onClick={() => handleReset()}>Reset</button>
+      ) : null}
+    </div>
+  );
+}
 
 /**
  *  flag ? setCount((s) => s + step) : (setCount((s) => s - step))

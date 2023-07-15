@@ -1,43 +1,48 @@
 import "./App.css";
 import { useState } from "react";
 
-const initialItems = [
+/*const initialItems = [
   { id: 1, description: "Passports", quantity: 2, packed: false },
   { id: 2, description: "Socks", quantity: 12, packed: true },
   { id: 3, description: "charger", quantity: 1, packed: false },
-];
-
+];*/
 
 function Logo() {
   return <h1>🌴 Far Away 🧳</h1>;
 }
 
-function Form({ setFunctionItens, listItens }) {
+function Form({ handleAddItens }) {
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState(1);
-
-
 
   function HandleSubmit(e) {
     e.preventDefault();
 
-    if (!description) return
+    if (!description) return;
 
-    const newItem = { description, quantity, packed: false, id: Date.now() }
-    setFunctionItens([...listItens, newItem])
-    console.log(newItem)
+    const newItem = { description, quantity, packed: false, id: Date.now() };
+    handleAddItens(newItem);
 
-    setDescription('')
-    setQuantity(1)
+    console.log(newItem);
+
+    setDescription("");
+    setQuantity(1);
   }
 
   return (
     <form className="add-form" onSubmit={HandleSubmit}>
       <h3>What do you need for your trip? </h3>
-      <select onChange={(e) => setQuantity(Number(e.target.value))} value={quantity}>
-        {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
-          <option key={num}>{num}</option>
-        ))}
+      <select
+        onChange={(e) => setQuantity(Number(e.target.value))}
+        value={quantity}
+      >
+        {Array.from({ length: 20 }, (_, i) => i + 1).map(
+          (
+            num //Atençao
+          ) => (
+            <option key={num}>{num}</option>
+          )
+        )}
       </select>
       <input
         type="text"
@@ -50,26 +55,17 @@ function Form({ setFunctionItens, listItens }) {
   );
 }
 
-function Item({ item }) {
-  return (
-    <li>
-      <input type="checkbox" />
-      <span style={item.packed ? { textDecoration: "line-through" } : {}}>
-        {item.quantity} {item.description}
-      </span>
-
-      <button>❌</button>
-    </li>
-  );
-}
-
-function PackingList({ array }) {
-
+function PackingList({ array, handleDell, handleToggleItem }) {
   return (
     <div className="list">
       <ul>
         {array.map((item) => (
-          <Item item={item} key={item.id} />
+          <Item
+            item={item}
+            key={item.id}
+            handleDell={handleDell}
+            handleToggleItem={handleToggleItem}
+          />
         ))}
       </ul>
     </div>
@@ -84,19 +80,62 @@ function Stats() {
   );
 }
 
+function Item({ item, handleDell, handleToggleItem }) {
+  return (
+    <li>
+      <input
+        type="checkbox"
+        value={item.packed}
+        onChange={() => handleToggleItem(item.id)}
+      />
+      <span style={item.packed ? { textDecoration: "line-through" } : {}}>
+        {item.quantity} {item.description}
+      </span>
+
+      <button onClick={() => handleDell(item.id)}>❌</button>
+    </li>
+  );
+}
+
 export default function App() {
-  const [itensList, setItensList] = useState(initialItems)
+  const [itensList, setItensList] = useState([]);
+
+  function handleAddItens(item) {
+    setItensList((s) => [...s, item]);
+  }
+
+  function handleDell(id) {
+    setItensList((s) => s.filter((item) => id !== item.id));
+  }
+
+  function handleToggleItem(id) {
+    setItensList((s) =>
+      s.map((item) =>
+        item.id === id ? { ...item, packed: !item.packed } : item
+      )
+    );
+  }
+  console.log(itensList);
+
   return (
     <div className="app">
       <Logo />
-      <Form setFunctionItens={setItensList} listItens={itensList} />
-      <PackingList array={itensList} />
+      <Form handleAddItens={handleAddItens} />
+      <PackingList
+        array={itensList}
+        handleDell={handleDell}
+        handleToggleItem={handleToggleItem}
+      />
       <Stats />
     </div>
   );
 }
 
 /**
+ * criar state dentro de handleAddItens
+ * 
+ * 
+ * 
  * const [itens, setItens] = useState([
     { n: 2, item: "escolva de dentes" },
     { n: 2, item: "bermuda" },
