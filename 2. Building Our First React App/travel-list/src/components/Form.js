@@ -12,8 +12,6 @@ export function Form({ handleAddItens }) {
     const newItem = { description, quantity, packed: false, id: Date.now() };
     handleAddItens(newItem);
 
-    console.log(newItem);
-
     setDescription("");
     setQuantity(1);
   }
