@@ -1,0 +1,14 @@
+qual estrela vai para display full={rating >= i + 1}
+
+hover nas estrelas:
+state Const [tempRating, setTempRating] = useState(0);
+onHoverIn={() => setTempRating(i + 1)}
+onHoverOut={() => setTempRating(0)}
+onMouseEnter={() => onHoverIn()}
+onMouseLeave={() => onHoverOut()}
+
+props editaveis pelo usuário do componente:
+css onHoverIn
+props no css
+width and height get the props
+svg edit the fill and stroke
