@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 const containerStyle = {
   display: "flex",
@@ -12,8 +13,16 @@ const StarContainerStyle = {
 };
 
 // Array.from({length: num}, (item, index) => (jsx))
-const StarRating = ({ maxRating = 5, color = "#fcc419", size = 49 }) => {
-  const [rating, setRating] = useState(maxRating);
+const StarRating = ({
+  maxRating = 5,
+  color = "#fcc419",
+  size = 49,
+  className = "",
+  messages = [],
+  defaultRating = 0,
+  setMovieRating = function () {},
+}) => {
+  const [rating, setRating] = useState(defaultRating);
   const [tempRating, setTempRating] = useState(0);
 
   const textStyle = {
@@ -25,10 +34,11 @@ const StarRating = ({ maxRating = 5, color = "#fcc419", size = 49 }) => {
 
   const handleRating = (rating) => {
     setRating(rating);
+    setMovieRating(rating);
   };
 
   return (
-    <div style={containerStyle}>
+    <div style={containerStyle} className={className}>
       <div style={StarContainerStyle}>
         {Array.from({ length: maxRating }, (_, i) => (
           <Star
@@ -42,9 +52,27 @@ const StarRating = ({ maxRating = 5, color = "#fcc419", size = 49 }) => {
           />
         ))}
       </div>
-      <p style={textStyle}>{tempRating ? tempRating : rating || ""}</p>
+      <p style={textStyle}>
+        {messages.length === maxRating
+          ? tempRating
+            ? messages[tempRating - 1]
+            : messages[rating - 1]
+          : tempRating
+          ? tempRating
+          : rating || ""}
+      </p>
     </div>
   );
+};
+
+StarRating.propTypes = {
+  maxRating: PropTypes.number,
+  defaultRating: PropTypes.number,
+  colo: PropTypes.string,
+  size: PropTypes.number,
+  messages: PropTypes.array,
+  className: PropTypes.string,
+  setMovieRating: PropTypes.func,
 };
 
 function Star({ onRating, full, onHoverIn, onHoverOut, color, size }) {

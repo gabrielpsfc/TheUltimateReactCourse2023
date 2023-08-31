@@ -8,7 +8,51 @@ onMouseEnter={() => onHoverIn()}
 onMouseLeave={() => onHoverOut()}
 
 props editaveis pelo usuário do componente:
-css onHoverIn
-props no css
+css dentro da função
+props passadas para o css
 width and height get the props
 svg edit the fill and stroke
+
+
+prop className:
+adicionar prop className para que o usuário consiga editar o style do component
+
+prop messages:
+passar prop como array
+utilizar prop em <p> return StarRating
+ {messages.length === maxRating
+          ? tempRating
+            ? messages[tempRating - 1]
+            : messages[rating - 1]
+          : tempRating
+          ? tempRating
+          : rating || ""}
+
+prop defaultRating:
+prop para o valor inicial do rating, declarar o state rating com o valor inicial de defaultRating
+
+
+prop SetMovieRating:
+levantamos o state rating dentro de StarRating para que possamos usa-lo fora do componente
+criamos um novo component
+declaramos um state nele
+retornamos StarRating e passamos o setState como setMovieState
+usamos rating para setar setMovieState dentro da função handleRating
+
+setar props como boll, num, str:
+import PropTypes from "prop-types";
+declarar 
+StarRating.propTypes = {};
+especifiar tipo para cada prop
+maxRating: PropTypes.number,
+é possível usar maxRating: PropTypes.number.isRequired
+StarRating.propTypes = {
+  maxRating: PropTypes.number,
+  defaultRating: PropTypes.number,
+  colo: PropTypes.string,
+  size: PropTypes.number,
+  messages: PropTypes.string,
+  className: PropTypes.string,
+  setMovieRating: PropTypes.func
+  *boll, 
+};

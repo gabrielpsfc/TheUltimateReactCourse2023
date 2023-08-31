@@ -1,0 +1,124 @@
+/*
+COLORS:
+
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* as bodas ou paddings não seram adicionadas a largura e comprimento total da box*/
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #777;
+  padding: 30px;
+}
+
+.header {
+  height: 95vh; /*a viewport se refere à área visível de um site em um dispositivo. Portanto, height: 95vh; define a altura do elemento como 95% da altura da viewport, ou seja, o elemento ocupará 95% da altura total da janela do navegador */
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(126, 213, 111, 0.802) /*converter para rgba e dar opacidade*/,
+      rgba(40, 180, 133, 0.801) /*converter para rgba e dar opacidade*/
+    ),
+    url(../img/hero.jpg);
+  background-size: cover; /* sempre tentará encaixar a imb totalmente dentro do elemento*/
+  background-position: top; /*define a posição vertical do plano de fundo de um elemento como "top", que significa que o plano de fundo será alinhado no topo do elemento. */
+  clip-path: polygon(
+    0% 0%,
+    100% 0%,
+    100% 80%,
+    0% 100%
+  ); /*https://bennettfeely.com/clippy/*/
+  position: relative; /*elementos filhos terão a posição relativa a esse elemento*/
+}
+
+.logo-box {
+  position: absolute; /*posição em relação ao pai com posição relativa*/
+  top: 40px;
+  left: 40px;
+}
+
+.logo {
+  height: 35px; /*altura do elemento*/
+}
+
+.text-box {
+  position: absolute; /*posição em relação ao pai com posição relativa (header)*/
+  top: 40%; /*inicia o text-box em 40% da altura do elemento pai/relativo*/
+  left: 50%; /*inicia o text-box em 50% da largura do elemento pai/relativo*/
+  transform: translate(
+    -50%,
+    -50%
+  ); /*A função transform: translate(-50%, -50%); no CSS é usada para mover um elemento em relação à sua posição atual. O valor -50% para ambos os eixos X e Y move o elemento para cima e para a esquerda em 50% do tamanho do próprio elemento*/
+}
+
+.heading-primary {
+  color: #ffff;
+  text-transform: uppercase;
+}
+.heading-primary-main {
+  display: block; /* propriedade CSS display é usada para determinar como um elemento HTML é exibido na página. Existem vários valores que você pode usar com a propriedade display para influenciar o layout de um elemento e seus filhos */
+  font-size: 60px;
+  font-weight: 400;
+  letter-spacing: 35px;
+}
+
+.heading-primary-sub {
+  display: block; /* propriedade CSS display é usada para determinar como um elemento HTML é exibido na página. Existem vários valores que você pode usar com a propriedade display para influenciar o layout de um elemento e seus filhos */
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 17.55px;
+}
+
+
+:root {
+  --color-lightest: #e5f4f8;
+  --color-light: #b5edfc;
+  --color-medium: #56d5f8;
+  --color-dark: #04c7fd;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.app {
+  position: relative;
+}
+
+.sidebar {
+  position: absolute;
+  background-color: var(--color-light);
+  height: 800px;
+  width: 200px;
+  top: 20%;
+  left: 0;
+  padding: 10px;
+  border-radius: 1%;
+}
+
+.text-ccb {
+  position: absolute;
+  background-color: var(--color-medium);
+  height: 600px;
+  width: 600px;
+  top: 50%;
+  left: 220px;
+}

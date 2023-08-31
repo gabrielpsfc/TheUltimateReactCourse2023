@@ -79,7 +79,11 @@ function FormSplitBill({ selectedFriend, handleSplitBill }) {
   }
 
   return (
-    <form className="form-split-bill" onSubmit={(e) => handleSubmit(e)}>
+    <form
+      className="form-split-bill"
+      onSubmit={(e) => handleSubmit(e)}
+      key={selectedFriend.id}
+    >
       <h2>SPLIT A BILL WITH YOUR {selectedFriend.name}</h2>
 
       <label> 👾 Bill Value:</label>
@@ -175,6 +179,7 @@ function App() {
         <FormSplitBill
           selectedFriend={selectedFriend}
           handleSplitBill={handleSplitBill}
+          key={selectedFriend.id}
         />
       )}
     </div>
