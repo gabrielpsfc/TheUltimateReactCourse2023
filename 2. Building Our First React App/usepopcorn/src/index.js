@@ -1,11 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 //import "./index.css";
-//import App from "./App";
-import StarRating from "./StarRating";
-import { useState } from "react";
+import App from "./App";
+//import StarRating from "./StarRating";
+//import { useState } from "react";
 
-function Tst() {
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+/**
+ * 
+ * 
+ * function Tst() {
   const [movieRating, setMovieRating] = useState(0);
 
   return (
@@ -14,12 +23,8 @@ function Tst() {
       <p>MovieRating is {movieRating}</p>
     </>
   );
-}
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  <React.StrictMode>
-    <StarRating maxRating={5} />
+} 
+ * <StarRating maxRating={5} />
     <StarRating maxRating={10} color={"#2323de"} size={60} className="" />
     <StarRating
       maxRating={5}
@@ -28,9 +33,8 @@ root.render(
       defaultRating={3}
     />
     <Tst />
-  </React.StrictMode>
-);
-
+ * 
+ */
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
