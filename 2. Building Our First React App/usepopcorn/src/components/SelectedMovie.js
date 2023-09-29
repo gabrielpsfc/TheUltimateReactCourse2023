@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import StarRating from "./StarRating";
 import { key } from "../App";
 
@@ -17,6 +17,12 @@ export function SelectedMovie({
   const isWatched = watched.map((s) => s.imdbID).includes(movie.imdbID);
   const isWatchedRating = watched.filter((s) => s.imdbID === movie.imdbID);
 
+  const countRef = useRef(0);
+
+  useEffect(() => {
+    if (userRating) countRef.current = countRef.current + 1;
+  }, [userRating]);
+
   const {
     Title: title,
     Year: year,
@@ -31,6 +37,11 @@ export function SelectedMovie({
   } = movie;
   setTitleLegend(`Movie | ${title}`);
 
+  const isTop = imdbRating > 8;
+  console.log(isTop);
+
+  const [avgRating, setAvgRating] = useState(0);
+
   function HandleNewMovie() {
     const newWatchedMovie = {
       imdbID: id,
@@ -40,8 +51,12 @@ export function SelectedMovie({
       imdbRating: Number(imdbRating),
       runtime: Number(runtime.split(" ").at(0)),
       userRating,
+      coutRatingDecisions: countRef.current,
     };
     onAddWatched(newWatchedMovie);
+
+    setAvgRating(Number(imdbRating));
+    setAvgRating((s) => (s + userRating) / 2);
   }
 
   useEffect(() => {
@@ -100,6 +115,7 @@ export function SelectedMovie({
               </p>
             </div>
           </header>
+          {avgRating ? avgRating : ""}
           <section>
             <div className="rating">
               {isWatched ? (

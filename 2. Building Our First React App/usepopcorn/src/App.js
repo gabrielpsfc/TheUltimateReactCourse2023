@@ -14,29 +14,6 @@ import { Loading } from "./components/Loading";
 import { MainPage } from "./components/MainPage";
 import { tempMovieData } from "./components/tempMovieData";
 
-const tempWatchedData = [
-  {
-    imdbID: "tt1375666",
-    Title: "Inception",
-    Year: "2010",
-    Poster:
-      "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg",
-    runtime: 148,
-    imdbRating: 8.8,
-    userRating: 10,
-  },
-  {
-    imdbID: "tt0088763",
-    Title: "Back to the Future",
-    Year: "1985",
-    Poster:
-      "https://m.media-amazon.com/images/M/MV5BZmU0M2Y1OGUtZjIxNi00ZjBkLTg1MjgtOWIyNThiZWIwYjRiXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
-    runtime: 116,
-    imdbRating: 8.5,
-    userRating: 9,
-  },
-];
-
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
@@ -45,16 +22,30 @@ export const key = "71f7d718";
 export default function App() {
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState(tempMovieData);
-  const [watched, setWatched] = useState([]);
   const [isOpen1, setIsOpen1] = useState(true);
   const [isOpen2, setIsOpen2] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
   const [tilteLegend, setTitleLegend] = useState("usePopcorn");
+
+  const [watched, setWatched] = useState(() => {
+    const storedValue = localStorage.getItem("watched");
+
+    // Verifique se há dados no localStorage e faça o parsing
+    if (storedValue) {
+      return JSON.parse(storedValue);
+    } else {
+      // Se não houver dados, retorne um valor padrão (por exemplo, uma matriz vazia)
+      return [];
+    }
+  });
+
   const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
   const avgUserRating = average(watched.map((movie) => movie.userRating));
   const avgRuntime = average(watched.map((movie) => movie.runtime));
+
+  //const [watched, setWatched] = useState([]);
 
   useEffect(() => {
     console.log("After initial render"); /*Effects run after the browser paint*/
@@ -79,8 +70,17 @@ export default function App() {
       alert("filme já incluido");
     } else {
       setWatched((s) => [...s, movie]);
+      //localStorage.setItem("watched", JSON.stringify([...watched, movie]));
     }
   }
+
+  useEffect(
+    function () {
+      localStorage.setItem("watched", JSON.stringify(watched));
+    },
+    [watched]
+  );
+
   function handleTitle(movieTitle) {
     document.title = `${movieTitle}`;
   }
