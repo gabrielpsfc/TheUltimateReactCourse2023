@@ -1,0 +1,8 @@
+.grid {
+  display: grid;
+  gap: 10px;
+  grid-template: repeat(6, 100px) / repeat(12, minmax(50px, 1fr));
+}
+.item {
+  background-color: gray;
+}

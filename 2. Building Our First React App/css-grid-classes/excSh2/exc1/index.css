@@ -1,0 +1,44 @@
+.grid {
+  display: grid;
+  gap: 10px;
+  grid-template: repeat(10, 65px) / repeat(4, minmax(150px, 1fr));
+  grid-template-areas:
+    "a a a a"
+    "b b c c"
+    "b b c c"
+    "d d d d"
+    "d d d d"
+    "d d d d"
+    "d d d d"
+    "e e e f"
+    "e e e f"
+    "g g g g";
+}
+.grid div:nth-child(1) {
+  background-color: gray;
+  grid-area: a;
+}
+.grid div:nth-child(2) {
+  background-color: rgb(79, 78, 90);
+  grid-area: b;
+}
+.grid div:nth-child(3) {
+  background-color: rgb(73, 81, 73);
+  grid-area: c;
+}
+.grid div:nth-child(4) {
+  background-color: rgb(76, 82, 90);
+  grid-area: d;
+}
+.grid div:nth-child(5) {
+  background-color: rgb(73, 81, 73);
+  grid-area: e;
+}
+.grid div:nth-child(6) {
+  background-color: rgb(79, 78, 90);
+  grid-area: f;
+}
+.grid div:nth-child(7) {
+  background-color: gray;
+  grid-area: g;
+}

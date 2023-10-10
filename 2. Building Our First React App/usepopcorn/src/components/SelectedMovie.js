@@ -20,7 +20,11 @@ export function SelectedMovie({
   const countRef = useRef(0);
 
   useEffect(() => {
-    if (userRating) countRef.current = countRef.current + 1;
+    countRef.current = 0;
+  }, [movie]);
+
+  useEffect(() => {
+    if (userRating) countRef.current += 1;
   }, [userRating]);
 
   const {

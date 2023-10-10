@@ -1,0 +1,46 @@
+.grid {
+  display: grid;
+  grid-gap: 10px;
+  width: 540px;
+  grid-template: 100px 100px / repeat(auto-fit, minmax(100px, 1fr));
+}
+
+/*
+
+Exercise 3
+In this exercise, you’ll explore auto-fill and auto-fit. This is admittedly
+a trickier exercise than the ones so far but if you work through it, you’ll have
+a great understanding of how auto-fill and auto-fit work. Make sure to
+use the grid visualization in Firefox for this exercise.
+1. Create a grid container with a fixed width of 500px and two rows
+2. Add four grid items to it and add a grid-gap of 10px.
+3. Then, use auto-fill to generate as many columns of size between
+100px and 200px.
+4. How many columns does it create and why?
+  display: grid;
+  grid-gap: 10px;
+  width: 500px;
+  grid-template: 100px 100px / repeat(auto-fill, minmax(100px, 200px));
+
+
+Now let’s bring the fr unit and auto-fit into the game:
+1. Change the maximum size from the fixed 200px to the dynamic 1fr.
+
+  .grid {
+  display: grid;
+  grid-gap: 10px;
+  width: 500px;
+  grid-template: 100px 100px / repeat(auto-fill, minmax(100px, 1fr));
+}
+
+2. How many columns are generated and why?
+3. Now it becomes a little tricky: Replace auto-fill with auto-fit. Do
+the columns take up more space now? Why or why not?
+4. Increase the grid container’s width to 540px. Why are the columns
+now larger with auto-fit than with auto-fill? (change back to
+auto-fill to check this)
+Hints: Remember which value of minmax(min, max) the grid prefers to use
+if it has a fixed value (not auto or some fr). Use Firefox to see how many
+columns are generated and what width the columns have.
+
+*/
