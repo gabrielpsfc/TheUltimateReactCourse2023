@@ -56,3 +56,35 @@ StarRating.propTypes = {
   setMovieRating: PropTypes.func
   *boll, 
 };
+
+
+
+custom hook
+
+fetch extract for custom hook
+- new file useMovie.js
+- export function named 
+- copy and past de content/ state isLoading, setError, setMovies/ -  import useState and useEffect
+- query  came as arg
+- import {useMovies} from "./useMovies"
+- return {movies, isLoading, error}
+handleClosemovie*
+- key past on custom hook 
+-destructure const {movies, isLoading, error} = useMovie(query)
+-pass callback
+-callback?.()
+
+
+171 - creating useLocalStorageState
+
+-- create file useLocalStorageState (export nameli)
+-- call hook [watched, setWatched] = useLocalStorageState([])
+-- copy/past const watched, setWatched useState content 
+-- get useEffect and past on useLocalStorageState
+-- pass generic key
+-- return value setValue
+-- test if there is storedValue
+
+
+
+

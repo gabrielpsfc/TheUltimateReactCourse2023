@@ -20,17 +20,46 @@ const Navbar = () => {
   );
 };
 
-const Sidebar = () => {
-  return (
-    <div className="sidebar">
-      <input type="text" /> <input type="text" />
-    </div>
-  );
-};
-
 const MainContent = () => {
   return (
     <div className="main-content">
+      <div className="sidebar">
+        <p>sidebar</p>
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+      </div>
       <div className="content-left">left</div>
       <div className="content-right">right</div>
     </div>
@@ -41,7 +70,6 @@ const App = () => {
   return (
     <div>
       <Navbar />
-      <Sidebar />
       <MainContent />
     </div>
   );

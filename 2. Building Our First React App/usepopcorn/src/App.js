@@ -13,6 +13,8 @@ import { ErrorMessage } from "./components/ErrorMessage";
 import { Loading } from "./components/Loading";
 import { MainPage } from "./components/MainPage";
 import { tempMovieData } from "./components/tempMovieData";
+import { useMovies } from "./customHooks/useMovies";
+import { useLocalStorageState } from "./customHooks/useLocalStorageState";
 
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
@@ -21,25 +23,12 @@ export const key = "71f7d718";
 
 export default function App() {
   const [query, setQuery] = useState("");
-  const [movies, setMovies] = useState(tempMovieData);
   const [isOpen1, setIsOpen1] = useState(true);
   const [isOpen2, setIsOpen2] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
   const [tilteLegend, setTitleLegend] = useState("usePopcorn");
-
-  const [watched, setWatched] = useState(() => {
-    const storedValue = localStorage.getItem("watched");
-
-    // Verifique se há dados no localStorage e faça o parsing
-    if (storedValue) {
-      return JSON.parse(storedValue);
-    } else {
-      // Se não houver dados, retorne um valor padrão (por exemplo, uma matriz vazia)
-      return [];
-    }
-  });
+  const { movies, isLoading, error } = useMovies(query, handleBackButton);
+  const [watched, setWatched] = useLocalStorageState([], "watched");
 
   const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
   const avgUserRating = average(watched.map((movie) => movie.userRating));
@@ -74,13 +63,6 @@ export default function App() {
     }
   }
 
-  useEffect(
-    function () {
-      localStorage.setItem("watched", JSON.stringify(watched));
-    },
-    [watched]
-  );
-
   function handleTitle(movieTitle) {
     document.title = `${movieTitle}`;
   }
@@ -102,52 +84,6 @@ export default function App() {
   function handleDell(id) {
     setWatched((s) => s.filter((s) => s.imdbID !== id));
   }
-
-  useEffect(
-    function () {
-      const controller = new AbortController();
-      async function fetchMovies() {
-        try {
-          setIsLoading(true);
-          setError("");
-
-          const res = await fetch(
-            `http://www.omdbapi.com/?apikey=${key}&s=${query}`,
-            { signal: controller.signal }
-          );
-
-          if (!res.ok)
-            throw new Error("something went wrong with fetching movies");
-
-          const data = await res.json();
-
-          if (data.Response === "False") throw new Error("Movie not found");
-          console.log(data.Search);
-          setMovies(data.Search);
-          setError("");
-        } catch (err) {
-          console.error(err.message);
-
-          if (err.name !== "AbortError") setError(err.message);
-        } finally {
-          setIsLoading(false);
-        }
-      }
-
-      if (!query.length) {
-        setMovies([]);
-        setError("");
-        return;
-      }
-      handleBackButton();
-      fetchMovies();
-
-      return function () {
-        controller.abort();
-      };
-    },
-    [query]
-  );
 
   return (
     <>

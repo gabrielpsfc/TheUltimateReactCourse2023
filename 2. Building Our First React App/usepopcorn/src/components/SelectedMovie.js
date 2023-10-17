@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import StarRating from "./StarRating";
 import { key } from "../App";
+import { useKey } from "../customHooks/useKey";
 
 export function SelectedMovie({
   id,
@@ -63,22 +64,29 @@ export function SelectedMovie({
     setAvgRating((s) => (s + userRating) / 2);
   }
 
-  useEffect(() => {
-    if (selectedId) {
-      function callback(e) {
-        if (e.code === "Escape") {
-          console.log("closing inside");
-          handleBackButton();
+  useKey("Escape", handleBackButton);
+
+  /**
+  * 
+ 
+ useEffect(() => {
+   if (selectedId) {
+     function callback(e) {
+       if (e.code === "Escape") {
+         console.log("closing inside");
+         handleBackButton();
         }
       }
-
+      
       document.addEventListener("keydown", callback);
-
+      
       return function () {
         document.removeEventListener("keydown", callback);
       };
     }
   }, [selectedId, handleBackButton]);
+  
+  *  */
   useEffect(
     function () {
       setLoading(true);
