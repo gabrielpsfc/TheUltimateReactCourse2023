@@ -1,0 +1,77 @@
+.grid1 {
+  display: grid;
+  gap: 10px;
+  grid-template: 100px 100px / repeat(3, 250px);
+  height: 400px;
+  border: solid 1px white;
+  margin: 15px;
+}
+
+.grid2 {
+  display: grid;
+  gap: 10px;
+  grid-template: 100px 100px / repeat(3, 250px);
+  height: 400px;
+  border: solid 1px white;
+  margin: 15px;
+  justify-content: center; /*Horizontal*/
+  align-content: end; /*vertical*/
+}
+
+.grid3 {
+  display: grid;
+  gap: 10px;
+  grid-template: 100px 100px / repeat(3, 250px);
+  height: 400px;
+  border: solid 1px white;
+  margin: 15px;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.grid4 {
+  display: grid;
+  gap: 10px;
+  grid-template: 100px 100px / repeat(3, 250px);
+  height: 400px;
+  border: solid 1px white;
+  margin: 15px;
+  align-items: center;
+  justify-items: end;
+}
+
+.grid5 {
+  display: grid;
+  gap: 10px;
+  grid-template: 100px 100px / repeat(3, 250px);
+  border: solid 1px white;
+  margin: 15px;
+}
+
+.grid5 div:nth-child(1) {
+  justify-self: center;
+  align-self: center;
+}
+.grid5 div:nth-child(2) {
+  justify-self: end;
+}
+
+.grid5 div:nth-child(3) {
+  justify-self: auto;
+  align-self: center;
+}
+
+.grid5 div:nth-child(4) {
+  justify-self: end;
+  align-self: start;
+}
+
+.grid5 div:nth-child(5) {
+  justify-self: center;
+  align-self: center;
+}
+
+.grid5 div:nth-child(6) {
+  justify-self: center;
+}
+/*jhav*/

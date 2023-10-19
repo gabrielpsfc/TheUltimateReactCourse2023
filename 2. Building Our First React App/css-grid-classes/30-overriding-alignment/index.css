@@ -1,0 +1,29 @@
+.grid {
+  /*   
+  min-width: 600px;
+  max-width: 800px;
+  */
+  display: grid;
+  grid-gap: 10px;
+  grid-template: 150px 150px / repeat(3, 200px);
+  border: 1px solid white;
+  padding: 10px;
+  height: 400px;
+
+  justify-content: center;
+  align-content: center;
+
+  /*center, start, end, stretch, space-around, space-between, space-evenly */
+}
+
+.grid div:nth-child(1) {
+  justify-self: start; /* justify item for the hole item container*/
+}
+.grid div:nth-child(3) {
+  justify-self: end; /* justify item for the hole item container horizontal*/
+  align-self: center; /*vertical*/
+}
+.grid div:nth-child(5) {
+  justify-self: center;
+  align-self: center;
+}
