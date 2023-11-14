@@ -3,7 +3,7 @@ import { SpanText } from "./SpanText";
 
 function ContentLeft({ valCCB }) {
   const {
-    nome = "fulano da Silva",
+    nome,
     cpf,
     conta,
     produto,
@@ -32,7 +32,7 @@ function ContentLeft({ valCCB }) {
     cetAnual,
   } = valCCB;
   return (
-    <div>
+    <div className="left-content">
       Eu, <SpanText content={nome}>"Nome do cliente"</SpanText>, CPF:{" "}
       <SpanText content={cpf}>"000.000.000-00"</SpanText>, titular da conta
       corrente nº <SpanText content={conta}>"123.456789-0"</SpanText>, autorizo

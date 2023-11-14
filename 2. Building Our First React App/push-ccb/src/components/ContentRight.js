@@ -3,7 +3,7 @@ import { SpanText } from "./SpanText";
 function ContentRight({ valCCB }) {
   const { nome, cpf, proposta, dataInclusao, seguro, percenSeguro } = valCCB;
   return (
-    <div>
+    <div className="right-content">
       Eu, <SpanText content={nome}>"Nome do cliente"</SpanText>, CPF:
       <SpanText content={cpf}>"000.000.000-00"</SpanText> estou ciente e
       autorizo que, a partir deste aceite eletrônico: (1) a operação vinculada à

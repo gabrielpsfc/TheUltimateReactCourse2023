@@ -1,13 +1,20 @@
 import React from "react";
 import "./App.css";
-import { MainContent } from "./MainContent";
-import { Navbar } from "./Navbar";
+import { MainContent } from "./components/MainContent";
+import { Navbar } from "./components/Navbar";
+import { useState } from "react";
 
 const App = () => {
+  const [redirecionamento, setRedirecionamento] = useState(false);
+
   return (
     <div>
-      <Navbar />
-      <MainContent />
+      {redirecionamento ? <p>ok</p> : <p>!ok</p>}
+      <Navbar
+        setRedirecionamento={setRedirecionamento}
+        redirecionamento={redirecionamento}
+      />
+      <MainContent redirecionamento={redirecionamento} />
     </div>
   );
 };
