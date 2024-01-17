@@ -2,9 +2,10 @@ import React from "react";
 
 const Options = ({ question, dispatch, answer }) => {
   const hasAnswered = answer !== null;
+
   return (
     <div className="options">
-      {question.options.map((s, index) => (
+      {question.options.map((op, index) => (
         <button
           className={`btn btn-option ${index === answer ? "answer" : ""} ${
             hasAnswered
@@ -13,11 +14,11 @@ const Options = ({ question, dispatch, answer }) => {
                 : "wrong"
               : ""
           }`}
-          key={s}
-          disabled={hasAnswered}
+          key={index}
           onClick={() => dispatch({ type: "newAnswer", payload: index })}
+          disabled={hasAnswered}
         >
-          {s}
+          {op}
         </button>
       ))}
     </div>
