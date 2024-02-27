@@ -1,12 +1,5 @@
-import PagesNav from "../components/PagesNav";
-
-function Pricing() {
-  return (
-    <div>
-      <PagesNav></PagesNav>
-      Pricing
-    </div>
-  );
-}
+const Pricing = () => {
+  return <div>Pricing</div>;
+};
 
 export default Pricing;
